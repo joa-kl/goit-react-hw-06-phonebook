@@ -5,38 +5,30 @@ import { handleAddContact } from "redux/contacts/contactSlice";
 import { nanoid } from "nanoid";
 import { Notify } from "notiflix";
 
-const ContactForm = ({ onSubmit }) => {
+const ContactForm = () => {
     const dispatch = useDispatch();
      const contacts = useSelector(state => state.contacts.items);
     const [form, setForm] = useState({
         name: "",
         number: "",
     })
-    // const [name, setName] = useState("");
-    // const [number, setNumber] = useState("");
 
-    // const handleChange = evt => {
-    //     const { name, value } = evt.target;
-    //     if (name === 'name') {
-    //         setName(value);
-    //     } else if (name === 'number') {
-    //         setNumber(value);
-    //     }
-    // };  
-    
-      const handleChange = ({ target }) => {
+
+    const handleChange = ({ target }) => {
         const { name, value } = target;
         setForm(prevForm => ({ ...prevForm, [name]: value }));
     };
     const { name, number } = form;
 
-      const isUniqueContact = () => {
+
+    const isUniqueContact = () => {
         const isExistContact = contacts.find(contact => contact.name === name);
         if (isExistContact) {
         Notify.failure("Contact is already exist");
         }
         return !isExistContact;
     };
+
 
      const validateForm = () => {
         if (!name || !number) {
@@ -45,6 +37,7 @@ const ContactForm = ({ onSubmit }) => {
         }
         return isUniqueContact(name);
     };
+
 
       const handleFormSubmit = event => {
         event.preventDefault();
@@ -59,11 +52,7 @@ const ContactForm = ({ onSubmit }) => {
         resetForm();
     };
     
-    // const handleFormSubmit = evt => {
-    //     evt.preventDefault();
-    //     onSubmit(name, number);
-    //     resetInput();
-    // };
+
 
      useEffect(() => {
         if (contacts) {
@@ -71,10 +60,7 @@ const ContactForm = ({ onSubmit }) => {
         }
     }, [contacts]);
 
-    // const resetInput = () => {
-    //     setName(""); 
-    //     setNumber("");
-    // };
+
 
         return (
             <form onSubmit={handleFormSubmit} className={css.form}>
