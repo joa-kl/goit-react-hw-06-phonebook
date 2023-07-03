@@ -1,9 +1,7 @@
 import css from './App.module.css';
-import { nanoid } from 'nanoid';
 import ContactForm  from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
-import { useEffect, useState } from 'react';
 
 export const App = () => {
 
