@@ -21,7 +21,6 @@ const contactsItemsSlice = createSlice({
 });
 
 
-
 const contactsFilterSlice = createSlice({
     name: "filter",
     initialState: "",
@@ -29,7 +28,6 @@ const contactsFilterSlice = createSlice({
         filterContact: (state, action) => action.payload,
     },
 });
-
 
 
 export const { handleAddContact, handleRemoveContact } = contactsItemsSlice.actions;
