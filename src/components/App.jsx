@@ -5,7 +5,7 @@ import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
 import { useEffect, useState } from 'react';
 
-const App = () => {
+export const App = () => {
 
   const [contacts, setContacts] = useState([
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },

@@ -1,29 +1,80 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./ContactForm.module.css"
+import { useDispatch, useSelector } from "react-redux";
+import { handleAddContact } from "redux/contacts/contactSlice";
+import { nanoid } from "nanoid";
+import { Notify } from "notiflix";
 
-const ContactForm = ({onSubmit}) => {
-    const [name, setName] = useState("");
-    const [number, setNumber] = useState("");
+const ContactForm = ({ onSubmit }) => {
+    const dispatch = useDispatch();
+     const contacts = useSelector(state => state.contacts.items);
+    const [form, setForm] = useState({
+        name: "",
+        number: "",
+    })
+    // const [name, setName] = useState("");
+    // const [number, setNumber] = useState("");
 
-    const handleChange = evt => {
-        const { name, value } = evt.target;
-        if (name === 'name') {
-            setName(value);
-        } else if (name === 'number') {
-            setNumber(value);
-        }
-    };       
+    // const handleChange = evt => {
+    //     const { name, value } = evt.target;
+    //     if (name === 'name') {
+    //         setName(value);
+    //     } else if (name === 'number') {
+    //         setNumber(value);
+    //     }
+    // };  
     
-    const handleFormSubmit = evt => {
-        evt.preventDefault();
-        onSubmit(name, number);
-        resetInput();
+      const handleChange = ({ target }) => {
+        const { name, value } = target;
+        setForm(prevForm => ({ ...prevForm, [name]: value }));
+    };
+    const { name, number } = form;
+
+      const isUniqueContact = () => {
+        const isExistContact = contacts.find(contact => contact.name === name);
+        if (isExistContact) {
+        Notify.failure("Contact is already exist");
+        }
+        return !isExistContact;
     };
 
-    const resetInput = () => {
-        setName(""); 
-        setNumber("");
+     const validateForm = () => {
+        if (!name || !number) {
+        Notify.failure("Some field is empty");
+        return false;
+        }
+        return isUniqueContact(name);
     };
+
+      const handleFormSubmit = event => {
+        event.preventDefault();
+        const isValidateForm = validateForm();
+        if (!isValidateForm) return;
+
+        dispatch(
+        handleAddContact({ id: nanoid(), name, number }),
+        Notify.success("Contact was added to phonebook"),
+        );
+        const resetForm = () => setForm({ name: "", number: "" });
+        resetForm();
+    };
+    
+    // const handleFormSubmit = evt => {
+    //     evt.preventDefault();
+    //     onSubmit(name, number);
+    //     resetInput();
+    // };
+
+     useEffect(() => {
+        if (contacts) {
+        localStorage.setItem("contacts", JSON.stringify(contacts));
+        }
+    }, [contacts]);
+
+    // const resetInput = () => {
+    //     setName(""); 
+    //     setNumber("");
+    // };
 
         return (
             <form onSubmit={handleFormSubmit} className={css.form}>
