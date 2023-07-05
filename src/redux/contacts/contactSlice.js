@@ -9,7 +9,6 @@ const initialContacts =
     ];
 
 
-
 const contactsItemsSlice = createSlice({
     name: "items",
     initialState:
