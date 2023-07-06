@@ -11,7 +11,3 @@ export const contactsFilterSlice = createSlice({
 
 export const { filterContact } = contactsFilterSlice.actions;
 
-// const contactsReducer = combineReducers({
-//     // [contactsItemsSlice.name]: contactsItemsSlice.reducer,
-//     [contactsFilterSlice.name]: contactsFilterSlice.reducer,
-// });

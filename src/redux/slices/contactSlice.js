@@ -1,6 +1,5 @@
-import { createSlice, combineReducers } from "@reduxjs/toolkit";
-// import { initialContacts } from "../store";
-// import { contactsFilterSlice } from "./filterSlice";
+import { createSlice } from "@reduxjs/toolkit";
+
 
 const initialContacts =
     [
@@ -22,13 +21,5 @@ export const contactsItemsSlice = createSlice({
 });
 
 
-
 export const { handleAddContact, handleRemoveContact } = contactsItemsSlice.actions;
 
-
-// export const contactsReducer = combineReducers({
-//     [contactsItemsSlice.name]: contactsItemsSlice.reducer,
-//     [contactsFilterSlice.name]: contactsFilterSlice.reducer,
-// });
-
-// export default contactsReducer;
