@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import css from "./ContactForm.module.css"
 import { useDispatch, useSelector } from "react-redux";
-import { handleAddContact } from "redux/contacts/contactSlice";
+import { handleAddContact } from "redux/slices/contactSlice";
 import { nanoid } from "nanoid";
 import { Notify } from "notiflix";
 

@@ -1,12 +1,14 @@
 import { createSlice, combineReducers } from "@reduxjs/toolkit";
+import { initialContacts } from "../store";
+import { contactsFilterSlice } from "./filterSlice";
 
-const initialContacts =
-    [
-        { id: "id-111", name: "Rosie Simpson", number: "459-12-56" },
-        { id: "id-211", name: "Hermione Kline", number: "443-89-12" },
-        { id: "id-311", name: "Eden Clements", number: "645-17-79" },
-        { id: "id-411", name: "Annie Copeland", number: "227-91-26" },
-    ];
+// const initialContacts =
+//     [
+//         { id: "id-111", name: "Rosie Simpson", number: "459-12-56" },
+//         { id: "id-211", name: "Hermione Kline", number: "443-89-12" },
+//         { id: "id-311", name: "Eden Clements", number: "645-17-79" },
+//         { id: "id-411", name: "Annie Copeland", number: "227-91-26" },
+//     ];
 
 
 const contactsItemsSlice = createSlice({
@@ -20,17 +22,9 @@ const contactsItemsSlice = createSlice({
 });
 
 
-const contactsFilterSlice = createSlice({
-    name: "filter",
-    initialState: "",
-    reducers: {
-        filterContact: (state, action) => action.payload,
-    },
-});
-
 
 export const { handleAddContact, handleRemoveContact } = contactsItemsSlice.actions;
-export const { filterContact } = contactsFilterSlice.actions;
+
 
 const contactsReducer = combineReducers({
     [contactsItemsSlice.name]: contactsItemsSlice.reducer,
