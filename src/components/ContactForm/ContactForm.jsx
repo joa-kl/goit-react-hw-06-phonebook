@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleAddContact } from "redux/slices/contactSlice";
 import { nanoid } from "nanoid";
 import { Notify } from "notiflix";
+import { selectContacts } from "redux/selectors";
 
 const ContactForm = () => {
     const dispatch = useDispatch();
-     const contacts = useSelector(state => state.contacts.items);
+    const contacts = useSelector(selectContacts);
     const [form, setForm] = useState({
         name: "",
         number: "",
